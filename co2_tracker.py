@@ -12,7 +12,7 @@ toothbrush = 30 # Verbauch in mg für 2min elektrische Zahnbürste
 one_min_phonecall = 100 # Verbrauch in mg für eine Minute Handy-Telefonie
 bus_meter = 103 # Verbrauch in mg für einen Meter mit dem Bus
 car_meter = 197 # Verbrauch in mg für einen Meter mit einem Auto (Toyota Corolla)
-pasta = 4000 # Verbrauch in mg für die Produktion von 1g Hartweizen-Pasta
+pasta = 2640 # Verbrauch in mg für die Produktion von 1g Hartweizen-Pasta
 dishwasher = 500000 # Verbrauch in mg für eine 5kg Ladung im Standard-Programm 40°
 # Werte nach https://www.co2everything.com
 
