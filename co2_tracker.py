@@ -10,8 +10,11 @@ co2_output = 0.19
 
 toothbrush = 30 # Verbauch in mg für 2min elektrische Zahnbürste
 one_min_phonecall = 100 # Verbrauch in mg für eine Minute Handy-Telefonie
+bus_meter = 103 # Verbrauch in mg für einen Meter mit dem Bus
+car_meter = 197 # Verbrauch in mg für einen Meter mit einem Auto (Toyota Corolla)
+pasta = 4000 # Verbrauch in mg für die Produktion von 1g Hartweizen-Pasta
 dishwasher = 500000 # Verbrauch in mg für eine 5kg Ladung im Standard-Programm 40°
-bus_meter = 37 # Verbrauch in mg für einen Meter mit dem Bus
+# Werte nach https://www.co2everything.com
 
 # Seiteninhalt
 st.set_page_config(page_title="CO2-Tracker für GenKI", page_icon="🤖")
@@ -59,10 +62,14 @@ st.space(size="xxsmall")
 st.write("**Das entspricht:**")
 st.write("🪥", str(round((verbrauch_gesamt/toothbrush)/2*60, 2)), "Sekunden eine elektrische Zahnbürste laufen lassen.")
 st.write("📞", str(round((verbrauch_gesamt/one_min_phonecall)*60, 2)), "Sekunden mit dem Handy telefonieren.")
+st.write("🚗", str(round(verbrauch_gesamt/car_meter, 2)), "Meter mit dem Auto fahren.")
 st.write("🚌", str(round(verbrauch_gesamt/bus_meter, 2)), "Meter mit dem Bus fahren.")
+st.write("🍝", str(round(verbrauch_gesamt/pasta, 2)), "Gramm Pasta (gesamte Produktion).")
 
 if verbrauch_gesamt >= 10000:
     st.write("🫧", str(round(verbrauch_gesamt/dishwasher, 5)), "mal 5 kg Wäsche waschen.")
+
+st.caption("Die Vergleichswerte basieren auf den Informationen von https://www.co2everything.com/")
 
 st.divider()
 
