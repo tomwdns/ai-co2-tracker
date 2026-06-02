@@ -17,6 +17,8 @@ st.header("CO2-Tracker für GenKI")
 
 st.caption("Tom Weidensdorfer (tom.weidensdorfer@tu-dresden.de)  \n*Team Digitale Lehre des Bereichs Geistes- und Sozialwissenschaften der Technischen Universität Dresden*")
 
+st.badge("06/2026", color="blue")
+
 st.write("Dieses Tool dient dazu, ein Gefühl dafür zu vermitteln, wie viel CO2 die Verwendung von generativer künstlicher Intelligenz verbraucht. Dafür können eigene Prompts, die auf ChatGPT und Co. eingegeben wurden, inklusive des generierten Outputs hier eingegeben werden. Das Tool rechnet automatisch den Verbrauch aus und rechnet diesen anschließend in alltägliche Beispiele um.")
 
 st.divider()
