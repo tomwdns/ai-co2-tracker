@@ -13,6 +13,9 @@ one_min_phonecall = 100 # Verbrauch in mg für eine Minute Handy-Telefonie
 dishwasher = 500000 # Verbrauch in mg für eine 5kg Ladung im Standard-Programm 40°
 bus_meter = 37 # Verbrauch in mg für einen Meter mit dem Bus
 
+# Seiteninhalt
+st.set_page_config(page_title="CO2-Tracker für GenKI", page_icon="🤖")
+
 st.header("CO2-Tracker für GenKI")
 
 st.caption("Tom Weidensdorfer (tom.weidensdorfer@tu-dresden.de)  \n*Team Digitale Lehre des Bereichs Geistes- und Sozialwissenschaften der Technischen Universität Dresden*")
