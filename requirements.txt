@@ -1,0 +1,2 @@
+streamlit
+tiktoken==0.12.*
