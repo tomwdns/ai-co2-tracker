@@ -15,6 +15,8 @@ car_meter = 197 # Verbrauch in mg für einen Meter mit einem Auto (Toyota Coroll
 pasta = 2640 # Verbrauch in mg für die Produktion von 1g Hartweizen-Pasta
 dishwasher = 500000 # Verbrauch in mg für eine 5kg Ladung im Standard-Programm 40°
 # Werte nach https://www.co2everything.com
+one_min_video_call = 265 # mg pro Minute in einem durchschnittlichen Zoom-Call
+# nach Mortas 2025
 
 # Seiteninhalt
 st.set_page_config(page_title="CO2-Tracker für GenKI", page_icon="🤖")
@@ -62,6 +64,7 @@ st.space(size="xxsmall")
 st.write("**Das entspricht:**")
 st.write("🪥", str(round((verbrauch_gesamt/toothbrush)/2*60, 2)), "Sekunden eine elektrische Zahnbürste laufen lassen.")
 st.write("📞", str(round((verbrauch_gesamt/one_min_phonecall)*60, 2)), "Sekunden mit dem Handy telefonieren.")
+st.write("🧑🏻‍💻", str(round((verbrauch_gesamt/one_min_video_call)*60, 2)), "Sekunden Videotelefonie.")
 st.write("🚗", str(round(verbrauch_gesamt/car_meter, 2)), "Meter mit dem Auto fahren.")
 st.write("🚌", str(round(verbrauch_gesamt/bus_meter, 2)), "Meter mit dem Bus fahren.")
 st.write("🍝", str(round(verbrauch_gesamt/pasta, 2)), "Gramm Pasta (gesamte Produktion).")
@@ -69,7 +72,7 @@ st.write("🍝", str(round(verbrauch_gesamt/pasta, 2)), "Gramm Pasta (gesamte Pr
 if verbrauch_gesamt >= 10000:
     st.write("🫧", str(round(verbrauch_gesamt/dishwasher, 5)), "mal 5 kg Wäsche waschen.")
 
-st.caption("Die Vergleichswerte basieren auf den Informationen von https://www.co2everything.com/")
+st.caption("Die Vergleichswerte basieren auf den Informationen von *https://www.co2everything.com/* sowie *Mortas 2025*")
 
 st.divider()
 
@@ -79,6 +82,7 @@ st.markdown(
     "- **Jalilov**, Orkhan & **Weidensdorfer**, Tom (2025). *Einsatz generativer KI-Systeme im Unterricht*. Zenodo. DOI: 10.5281/zenodo.18242615.  \n"
     "- **Kurpicz-Briki**, Mascha (2024). *Mehr als ein Chatbot: Die Entmystifizierung der Sprachmodelle*. Cham: Springer Nature Switzerland. DOI: 10.1007/978-3-031-58545-6.  \n"
     "- **Luttrell**, Regina & **Bowman**, Nicholas David (Hrsg.) (2026). *Provoking Generative AI Futures: Merging Theory and Praxis*. Oxford: Routledge. DOI: 10.4324/9781003487623.  \n"
+    "- **Mortas**, Felix (2025). *Assessing the Carbon Footprint of Virtual Meetings: A Quantitative Analysis of Camera Usage*. DOI: 10.48550/arXiv.2601.06045.  \n"
 )
 
 st.divider()
