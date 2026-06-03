@@ -78,7 +78,7 @@ st.divider()
 
 st.subheader("Quellen und Literaturhinweise")
 st.markdown(
-    "- **Andersen**, Lisa Bondo / **Herklotz**, Markus / **Liu**, Ailin / **Goeke**, Moritz / **Juelich**, Michael / **Kern**, Christoph & **Kreuter**, Frauke (2026). \"From Awareness to Action? The Impact of CO2 Emission Feedback on Student LLM Usage\". In: *Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA \'26), April 13-17, 2026, Bacelona, Spain.* New York, NY, USA: ACM. DOI: 10.1145/3772363.3798840.  \n"
+    "- **Andersen**, Lisa Bondo / **Herklotz**, Markus / **Liu**, Ailin / **Goeke**, Moritz / **Juelich**, Michael / **Kern**, Christoph & **Kreuter**, Frauke (2026). \"From Awareness to Action? The Impact of CO2 Emission Feedback on Student LLM Usage\". In: *Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA \'26), April 13-17, 2026, Barcelona, Spain.* New York, NY, USA: ACM. DOI: 10.1145/3772363.3798840.  \n"
     "- **Jalilov**, Orkhan & **Weidensdorfer**, Tom (2025). *Einsatz generativer KI-Systeme im Unterricht*. Zenodo. DOI: 10.5281/zenodo.18242615.  \n"
     "- **Kurpicz-Briki**, Mascha (2024). *Mehr als ein Chatbot: Die Entmystifizierung der Sprachmodelle*. Cham: Springer Nature Switzerland. DOI: 10.1007/978-3-031-58545-6.  \n"
     "- **Luttrell**, Regina & **Bowman**, Nicholas David (Hrsg.) (2026). *Provoking Generative AI Futures: Merging Theory and Praxis*. Oxford: Routledge. DOI: 10.4324/9781003487623.  \n"
