@@ -72,7 +72,7 @@ st.write("🍝", str(round(verbrauch_gesamt/pasta, 2)), "Gramm Pasta (gesamte Pr
 if verbrauch_gesamt >= 10000:
     st.write("🫧", str(round(verbrauch_gesamt/dishwasher, 5)), "mal 5 kg Wäsche waschen.")
 
-st.caption("Die Vergleichswerte basieren auf den Informationen von *https://www.co2everything.com/* sowie *Mortas 2025*")
+st.caption("Die Vergleichswerte basieren auf den Informationen von **https://www.co2everything.com/** sowie **Mortas 2025**.")
 
 st.divider()
 
