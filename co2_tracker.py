@@ -25,9 +25,21 @@ st.header("CO2-Tracker für GenKI")
 
 st.caption("Tom Weidensdorfer (tom.weidensdorfer@tu-dresden.de)  \n*Team Digitale Lehre des Bereichs Geistes- und Sozialwissenschaften der Technischen Universität Dresden*")
 
-st.badge("06/2026", color="blue")
+st.badge("Stand: 06/2026", color="blue")
 
 st.write("Dieses Tool dient dazu, ein Gefühl dafür zu vermitteln, wie viel CO2 die Verwendung von generativer künstlicher Intelligenz verbraucht. Dafür können eigene Prompts, die auf ChatGPT und Co. eingegeben wurden, inklusive des generierten Outputs hier eingegeben werden. Das Tool rechnet automatisch den Verbrauch aus und rechnet diesen anschließend in alltägliche Beispiele um.")
+
+st.space("xxsmall")
+
+with st.expander("Details:"):
+    st.markdown('''
+        Zur Berechnung des CO2-Verbrauchs wird der übergebene User-Input und KI-Output mithilfe der Python-Bibliothek `TikToken` verarbeitet. Diese Bibliothek wird von OpenAI (dem Entwicklerunternehmen hinter ChatGPT) frei, [bspw. über GitHub](https://github.com/openai/tiktoken), zur Verfügung gestellt. Dabei werden die Inhalte tokenisiert, also in ihre einzelnen Einheiten unterteilt. Beim Tokenisierungsprozess wird exemplarisch von **ChatGPT-5 oder neuer** ausgegangen. Die Tokenisierung ist dabei keine reine Unterteilung in einzelne Wörter, wie an folgendem Beispiel erkennbar wird:  \n
+        Ausgangssatz: `Ich bin ein Beispielsatz.`  
+        Tokenisiert in: `Ich`/` bin`/` ein`/` Beisp`/`iels`/`atz`/`.`  \n
+        Die umgewandelten Token werden ausgezählt und in ihrer Anzahl mit den CO2-Werten nach *Andersen et al. 2026* multipliziert, wonach ein einzelnes Input-Token einen Verbrauch von **0,0003mg CO2/Token** und ein Output-Token einen Verbrauch von **0,19mg CO2/Token** verursacht.  \n
+        Der obenstehende Satz besteht aus 7 Token. Als Input würden bei der Verarbeitung durch ChatGPT-5 also 7\*0,0003=0,0021mg CO2 entstehen; als Output 7\*0,19=1,33mg CO2.  \n
+        Weitere Faktoren, wie Stromverbrauch des verwendeten Endgeräts, werden vom vorliegenden Tool nicht berücksichtigt.
+                ''', text_alignment="justify")
 
 st.divider()
 
@@ -72,7 +84,7 @@ st.write("🍝", str(round(verbrauch_gesamt/pasta, 2)), "Gramm Pasta (gesamte Pr
 if verbrauch_gesamt >= 10000:
     st.write("🫧", str(round(verbrauch_gesamt/dishwasher, 5)), "mal 5 kg Wäsche waschen.")
 
-st.caption("Die Vergleichswerte basieren auf den Informationen von **https://www.co2everything.com/** sowie **Mortas 2025**.")
+st.caption("Die Vergleichswerte basieren auf den Informationen von **https://www.co2everything.com/** sowie auf **Mortas 2025**.")
 
 st.divider()
 
