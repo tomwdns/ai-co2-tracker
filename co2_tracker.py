@@ -31,20 +31,27 @@ st.write("Dieses Tool dient dazu, ein Gefühl dafür zu vermitteln, wie viel CO2
 
 st.space("xxsmall")
 
-with st.expander("Details:"):
-    st.markdown('''
+beispiel = "Ich bin ein Beispielsatz."
+beispiel_tokens = enc.encode(beispiel)
+beispiel_tokens_dec = []
+
+for token in beispiel_tokens:
+    beispiel_tokens_dec.append(str(enc.decode([token])))
+
+with st.expander("ℹ️"):
+    st.markdown(f'''
         Zur Berechnung des CO2-Verbrauchs wird der übergebene User-Input und KI-Output mithilfe der Python-Bibliothek `TikToken` verarbeitet. Diese Bibliothek wird von OpenAI (dem Entwicklerunternehmen hinter ChatGPT) frei, [bspw. über GitHub](https://github.com/openai/tiktoken), zur Verfügung gestellt. Dabei werden die Inhalte tokenisiert, also in ihre einzelnen Einheiten unterteilt. Beim Tokenisierungsprozess wird exemplarisch von **ChatGPT-5 oder neuer** ausgegangen. Die Tokenisierung ist dabei keine reine Unterteilung in einzelne Wörter, wie an folgendem Beispiel erkennbar wird:  \n
-        Ausgangssatz: `Ich bin ein Beispielsatz.`  
-        Tokenisiert in: `Ich`/` bin`/` ein`/` Beisp`/`iels`/`atz`/`.`  \n
+        Ausgangssatz: `{beispiel}`  
+        Tokenisiert in: `{"`/`".join(beispiel_tokens_dec)}`  \n
         Die umgewandelten Token werden ausgezählt und in ihrer Anzahl mit den CO2-Werten nach *Andersen et al. 2026* multipliziert, wonach ein einzelnes Input-Token einen Verbrauch von **0,0003mg CO2/Token** und ein Output-Token einen Verbrauch von **0,19mg CO2/Token** verursacht.  \n
-        Der obenstehende Satz besteht aus 7 Token. Als Input würden bei der Verarbeitung durch ChatGPT-5 also 7\*0,0003=0,0021mg CO2 entstehen; als Output 7\*0,19=1,33mg CO2.  \n
-        Weitere Faktoren, wie Stromverbrauch des verwendeten Endgeräts, werden vom vorliegenden Tool nicht berücksichtigt.
+        Der obenstehende Satz besteht aus 7 Token. Als Input würden bei der Verarbeitung durch ChatGPT-5 also 7\*0,0003=**0,0021mg CO2** entstehen; als Output 7\*0,19=**1,33mg CO2**.  \n
+        Weitere Faktoren, wie beispielsweise der Stromverbrauch des verwendeten Endgeräts, werden vom vorliegenden Tool nicht berücksichtigt.
                 ''', text_alignment="justify")
 
 st.divider()
 
 st.subheader("User-Input")
-st.text_area("Kopiere hier deinen Original-Prompt hinein.", value="", key="user_input")
+st.text_area("Kopiere hier deinen kompletten Original-Prompt hinein.", value="", key="user_input")
 
 st.subheader("Output")
 st.text_area("Kopiere hier den kompletten Output hinein, den du von der verwendeten GenKI ausgegeben bekommen hast.", value="", key="ai_output")
@@ -95,8 +102,9 @@ st.markdown(
     "- **Kurpicz-Briki**, Mascha (2024). *Mehr als ein Chatbot: Die Entmystifizierung der Sprachmodelle*. Cham: Springer Nature Switzerland. DOI: 10.1007/978-3-031-58545-6.  \n"
     "- **Luttrell**, Regina & **Bowman**, Nicholas David (Hrsg.) (2026). *Provoking Generative AI Futures: Merging Theory and Praxis*. Oxford: Routledge. DOI: 10.4324/9781003487623.  \n"
     "- **Mortas**, Felix (2025). *Assessing the Carbon Footprint of Virtual Meetings: A Quantitative Analysis of Camera Usage*. DOI: 10.48550/arXiv.2601.06045.  \n"
+    "- **Weidensdorfer**, Tom (2026). *AI Literacy für Geistes- und Sozialwissenschaftler:innen*. Zenodo. DOI: 10.5281/zenodo.20590963.  \n"
 )
 
 st.divider()
 
-st.caption("Dieses Tool dient der Veranschaulichung im Rahmen von Sensibilisierungskursen zu *AI Literacy für die Geisteswissenschaften*. Es ist **nicht** als wissenschaftlich zitierbare Quelle geeignet und sollte mit Skepsis behandelt werden. Für Feedback, Literaturempfehlungen und andere Verbesserungsvorschläge bin ich dankbar.", text_alignment="justify")
+st.caption("Dieses Tool dient der Veranschaulichung im Rahmen von Sensibilisierungskursen zu *AI Literacy für die Geisteswissenschaften*. Es ist **nicht** als wissenschaftliche Quelle geeignet und sollte mit Skepsis behandelt werden. Für Feedback, Literaturempfehlungen und andere Verbesserungsvorschläge bin ich dankbar.", text_alignment="justify")
