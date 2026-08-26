@@ -6,7 +6,9 @@ enc = tiktoken.get_encoding("o200k_base")
 # Raum zur Vorab-Definition von Zahlen als Rechengrundlage
 co2_input = 0.0003
 co2_output = 0.19
+co2_image = 2200 #mg CO2 für ein generiertes Bild
 # Werte nach Andersen et al. 2026
+# Bildgenerierung nach Luccioni/Jernite/Strubell 2024 sowie Ecoia.ai 2025
 
 toothbrush = 30 # Verbauch in mg für 2min elektrische Zahnbürste
 one_min_phonecall = 100 # Verbrauch in mg für eine Minute Handy-Telefonie
@@ -17,6 +19,7 @@ dishwasher = 500000 # Verbrauch in mg für eine 5kg Ladung im Standard-Programm 
 # Werte nach https://www.co2everything.com
 one_min_video_call = 265 # mg pro Minute in einem durchschnittlichen Zoom-Call
 # nach Mortas 2025
+phone_charge = 5000 # mg für eine durchschnittliche Handyladung
 
 # Seiteninhalt
 st.set_page_config(page_title="CO2-Tracker für GenKI", page_icon="🤖")
@@ -25,9 +28,9 @@ st.header("CO2-Tracker für GenKI")
 
 st.caption("Tom Weidensdorfer (tom.weidensdorfer@tu-dresden.de)  \n*Team Digitale Lehre des Bereichs Geistes- und Sozialwissenschaften der Technischen Universität Dresden*")
 
-st.badge("Stand: 06/2026", color="blue")
+st.badge("Stand: 08/2026", color="blue")
 
-st.write("Dieses Tool dient dazu, ein Gefühl dafür zu vermitteln, wie viel CO2 die Verwendung von generativer künstlicher Intelligenz verbraucht. Dafür können eigene Prompts, die auf ChatGPT und Co. eingegeben wurden, inklusive des generierten Outputs hier eingegeben werden. Das Tool rechnet automatisch den Verbrauch aus und rechnet diesen anschließend in alltägliche Beispiele um.")
+st.write("Dieses Tool dient dazu, ein Gefühl dafür zu vermitteln, wie viel CO2 die Verwendung von generativer künstlicher Intelligenz verbraucht. Dafür können eigene Prompts, die auf ChatGPT und Co. eingegeben wurden, inklusive des generierten Outputs hier eingegeben werden. Das Tool rechnet automatisch den Verbrauch aus und diesen anschließend in alltägliche Beispiele um.")
 
 st.space("xxsmall")
 
@@ -56,11 +59,17 @@ st.text_area("Kopiere hier deinen kompletten Original-Prompt hinein.", value="",
 st.subheader("Output")
 st.text_area("Kopiere hier den kompletten Output hinein, den du von der verwendeten GenKI ausgegeben bekommen hast.", value="", key="ai_output")
 
+image = st.checkbox("Ich habe ein Bild generieren lassen.")
+
 tokens_input = enc.encode(st.session_state["user_input"])
 tokens_output = enc.encode(st.session_state["ai_output"])
 
 verbrauch_input = len(tokens_input) * co2_input
 verbrauch_output = len(tokens_output) * co2_output
+
+if image:
+    verbrauch_output += co2_image
+
 verbrauch_gesamt = verbrauch_input + verbrauch_output
 
 st.divider()
@@ -82,6 +91,7 @@ st.space(size="xxsmall")
 
 st.write("**Das entspricht:**")
 st.write("🪥", str(round((verbrauch_gesamt/toothbrush)/2*60, 2)), "Sekunden eine elektrische Zahnbürste laufen lassen.")
+st.write("📱", str(round(verbrauch_gesamt/phone_charge, 2)), "Mal ein Smartphone aufladen.")
 st.write("📞", str(round((verbrauch_gesamt/one_min_phonecall)*60, 2)), "Sekunden mit dem Handy telefonieren.")
 st.write("🧑🏻‍💻", str(round((verbrauch_gesamt/one_min_video_call)*60, 2)), "Sekunden Videotelefonie.")
 st.write("🚗", str(round(verbrauch_gesamt/car_meter, 2)), "Meter mit dem Auto fahren.")
@@ -89,17 +99,19 @@ st.write("🚌", str(round(verbrauch_gesamt/bus_meter, 2)), "Meter mit dem Bus f
 st.write("🍝", str(round(verbrauch_gesamt/pasta, 2)), "Gramm Pasta (gesamte Produktion).")
 
 if verbrauch_gesamt >= 10000:
-    st.write("🫧", str(round(verbrauch_gesamt/dishwasher, 5)), "mal 5 kg Wäsche waschen.")
+    st.write("🫧", str(round(verbrauch_gesamt/dishwasher, 5)), "Mal 5 kg Wäsche waschen.")
 
-st.caption("Die Vergleichswerte basieren auf den Informationen von **https://www.co2everything.com/** sowie auf **Mortas 2025**.")
+st.caption("Die Vergleichswerte basieren auf den Informationen von **https://www.co2everything.com/** sowie auf **Luccioni et al. 2024** und **Mortas 2025**.")
 
 st.divider()
 
 st.subheader("Quellen und Literaturhinweise")
 st.markdown(
     "- **Andersen**, Lisa Bondo / **Herklotz**, Markus / **Liu**, Ailin / **Goeke**, Moritz / **Juelich**, Michael / **Kern**, Christoph & **Kreuter**, Frauke (2026). \"From Awareness to Action? The Impact of CO2 Emission Feedback on Student LLM Usage\". In: *Extended Abstracts of the 2026 CHI Conference on Human Factors in Computing Systems (CHI EA \'26), April 13-17, 2026, Barcelona, Spain.* New York, NY, USA: ACM. DOI: 10.1145/3772363.3798840.  \n"
+    "- **Ecoia AI** (2025). *The Carbon Footprint of AI Image Generation*. https://ecoia.ai/blog/ai-image-generation-carbon-footprint/.  \n"
     "- **Jalilov**, Orkhan & **Weidensdorfer**, Tom (2025). *Einsatz generativer KI-Systeme im Unterricht*. Zenodo. DOI: 10.5281/zenodo.18242615.  \n"
     "- **Kurpicz-Briki**, Mascha (2024). *Mehr als ein Chatbot: Die Entmystifizierung der Sprachmodelle*. Cham: Springer Nature Switzerland. DOI: 10.1007/978-3-031-58545-6.  \n"
+    "- **Luccioni**, Alexandra Sasha / **Jernite**, Yacine & **Strubell**, Emma. *Power Hungry Processing:⚡️Watts⚡️Driving the Cost of AI Deployment?*. arXiv. DOI: 10.48550/arXiv.2311.16863.  \n"
     "- **Luttrell**, Regina & **Bowman**, Nicholas David (Hrsg.) (2026). *Provoking Generative AI Futures: Merging Theory and Praxis*. Oxford: Routledge. DOI: 10.4324/9781003487623.  \n"
     "- **Mortas**, Felix (2025). *Assessing the Carbon Footprint of Virtual Meetings: A Quantitative Analysis of Camera Usage*. DOI: 10.48550/arXiv.2601.06045.  \n"
     "- **Weidensdorfer**, Tom (2026). *AI Literacy für Geistes- und Sozialwissenschaftler:innen*. Zenodo. DOI: 10.5281/zenodo.20590963.  \n"
